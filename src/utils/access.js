@@ -28,4 +28,5 @@ module.exports = {
   requireAuth,
   isCandidate,
   isEmployer,
+
 };
