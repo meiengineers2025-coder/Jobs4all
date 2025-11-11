@@ -39,4 +39,5 @@ export function toast(message, type = "success") {
 
   // Hide spinner when page is ready
   window.addEventListener("load", hideSpinner);
+
 })();
