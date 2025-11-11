@@ -23,4 +23,5 @@ function calculateMatchScore(jobSkills, resumeText) {
   return isNaN(score) ? 0 : score;
 }
 
+
 module.exports = { calculateMatchScore };
