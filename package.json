@@ -1,19 +1,26 @@
 {
   "name": "jobs-portal",
   "version": "1.0.0",
+  "description": "Job portal with employer and candidate dashboards, resume parsing, AI matching, email, WhatsApp notifications and payments",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "body-parser": "^1.20.2",
-    "connect-sqlite3": "^0.9.15",
-    "dotenv": "^16.3.1",
+    "connect-sqlite3": "^0.9.0",
+    "dotenv": "^16.4.1",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^7.1.5",
     "express-session": "^1.17.3",
-    "multer": "^1.4.5",
-    "sqlite3": "^5.1.6"
+    "multer": "1.4.5-lts.1",
+    "nodemailer": "^6.9.14",
+    "pdf-parse": "^1.1.1",
+    "mammoth": "^1.7.0",
+    "sqlite3": "^5.1.7",
+    "twilio": "^4.21.1"
   }
 }
