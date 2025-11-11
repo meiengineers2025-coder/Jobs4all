@@ -42,4 +42,5 @@
 }
 .toast.success { background:#065f46 }   /* green */
 .toast.error   { background:#7f1d1d }   /* red */
+
 .toast.info    { background:#1f2937 }   /* dark */
