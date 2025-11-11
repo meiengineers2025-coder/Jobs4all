@@ -1,7 +1,7 @@
 {
   "name": "jobs-portal",
   "version": "1.0.0",
-  "description": "Job portal with employer and candidate dashboards, resume parsing, AI matching, email, WhatsApp notifications and payments",
+  "description": "Job portal with dashboards, resume parsing, AI matching, email notifications, WhatsApp alerts and payments",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "connect-sqlite3": "^0.9.0",
     "dotenv": "^16.4.1",
     "ejs": "^3.1.9",
