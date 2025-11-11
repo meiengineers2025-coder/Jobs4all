@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard | Jobs Portal</title>
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <style>
+        .dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 220px;
+            background: #0d1b2a;
+            color: white;
+            padding: 25px 15px;
+        }
+
+        .sidebar h3 { margin-bottom: 25px; }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            background: #1b263b;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 25px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            padding: 18px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: rgba(0,0,0,0.08) 0px 4px 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .quick-actions {
+            margin-top: 25px;
+        }
+
+        .btn-secondary {
+            padding: 10px 14px;
+            background: #1b263b;
+            color: white;
+            border-radius: 4px;
+            display: inline-block;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <%- include("../layouts/main") %>
+
+    <div class="dashboard-wrapper">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Employer Menu</h3>
+            <a href="/employer/dashboard" style="background:#1b263b;">Dashboard</a>
+            <a href="/employer/post-job">Post Job</a>
+            <a href="/employer/applicants">Applicants</a>
+            <a href="/employer/profile">Profile</a>
+            <a href="/employer/plans">Plans / Subscription</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <!-- Main Page -->
+        <div class="main-content">
+            <h2>Welcome, <%= employer.companyName || "Employer" %> 👋</h2>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    Jobs Posted
+                    <div class="stat-number"><%= employer.jobsPosted || 0 %></div>
+                </div>
+
+                <div class="stat-card">
+                    Applicants
+                    <div class="stat-number"><%= employer.applicants || 0 %></div>
+                </div>
+
+                <div class="stat-card">
+                    Profile Strength
+                    <div class="stat-number"><%= employer.completion || 60 %>%</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <a href="/employer/post-job" class="btn-primary">+ Post New Job</a>
+                <a href="/employer/applicants" class="btn-secondary">View Applicants</a>
+                <a href="/employer/profile" class="btn-secondary">Edit Profile</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

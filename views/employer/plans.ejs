@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plans & Subscription | Jobs Portal</title>
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <style>
+        .dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 220px;
+            background: #0d1b2a;
+            color: white;
+            padding: 25px 15px;
+        }
+
+        .sidebar h3 { margin-bottom: 25px; }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            background: #1b263b;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 25px;
+        }
+
+        /* Pricing Card Layout */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .plan-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: rgba(0,0,0,0.08) 0px 4px 10px;
+            text-align: center;
+        }
+
+        .plan-card h3 {
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 2rem;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px;
+        }
+
+        ul li {
+            margin: 8px 0;
+        }
+
+        .btn-plan {
+            padding: 12px 15px;
+            width: 100%;
+            background: #0072ff;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            display: block;
+            margin-top: 15px;
+        }
+
+        .btn-plan:hover {
+            background: #005be0;
+        }
+
+        /* Highlight Premium */
+        .premium {
+            border: 2px solid #0072ff;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<%- include("../layouts/main") %>
+
+<div class="dashboard-wrapper">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Employer Menu</h3>
+        <a href="/employer/dashboard">Dashboard</a>
+        <a href="/employer/post-job">Post Job</a>
+        <a href="/employer/applicants">Applicants</a>
+        <a href="/employer/profile">Profile</a>
+        <a href="/employer/plans" style="background:#1b263b;">Plans / Subscription</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <!-- Main Page -->
+    <div class="main-content">
+        <h2>Choose a Subscription Plan</h2>
+
+        <div class="pricing-grid">
+
+            <!-- Free Plan -->
+            <div class="plan-card">
+                <h3>Free Plan</h3>
+                <div class="price">₹0 / month</div>
+                <ul>
+                    <li>1 Job Post / month</li>
+                    <li>Limited Applicants</li>
+                    <li>No AI Matching</li>
+                </ul>
+                <a href="/payments/activate?plan=free" class="btn-plan">Continue</a>
+            </div>
+
+            <!-- Basic Plan -->
+            <div class="plan-card premium">
+                <h3>Basic Plan</h3>
+                <div class="price">₹999 / month</div>
+                <ul>
+                    <li>10 Job Posts / month</li>
+                    <li>Unlimited Applicants</li>
+                    <li>AI Resume Matching ✅</li>
+                </ul>
+                <a href="/payments/checkout?plan=basic" class="btn-plan">Buy Basic</a>
+            </div>
+
+            <!-- Premium Plan -->
+            <div class="plan-card">
+                <h3>Premium Plan</h3>
+                <div class="price">₹2499 / month</div>
+                <ul>
+                    <li>Unlimited Jobs + Applicants</li>
+                    <li>AI Matching + WhatsApp alerts ✅</li>
+                    <li>Priority Support</li>
+                </ul>
+                <a href="/payments/checkout?plan=premium" class="btn-plan">Upgrade to Premium</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

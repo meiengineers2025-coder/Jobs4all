@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job | Jobs Portal</title>
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <style>
+        .dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 220px;
+            background: #0d1b2a;
+            color: white;
+            padding: 25px 15px;
+        }
+
+        .sidebar h3 { margin-bottom: 25px; }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            background: #1b263b;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 25px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: rgba(0,0,0,0.08) 0px 4px 10px;
+            max-width: 700px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <%- include("../layouts/main") %>
+
+    <div class="dashboard-wrapper">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Employer Menu</h3>
+            <a href="/employer/dashboard">Dashboard</a>
+            <a href="/employer/post-job" style="background:#1b263b;">Post Job</a>
+            <a href="/employer/applicants">Applicants</a>
+            <a href="/employer/plans">Plans / Subscription</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <h2>Post a New Job</h2>
+
+            <% if (message) { %>
+                <div class="alert"><%= message %></div>
+            <% } %>
+
+            <form action="/jobs/create" method="POST" class="form-card">
+
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Job Type</label>
+                    <select name="type" required>
+                        <option value="">Select Job Type</option>
+                        <option>Full Time</option>
+                        <option>Part Time</option>
+                        <option>Internship</option>
+                        <option>Remote</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Salary Range (optional)</label>
+                    <input type="text" name="salary" placeholder="₹ (or $)">
+                </div>
+
+                <div class="form-group">
+                    <label>Job Location</label>
+                    <input type="text" name="location" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Required Skills (comma separated)</label>
+                    <input type="text" name="skills" placeholder="javascript, sql, react">
+                </div>
+
+                <div class="form-group">
+                    <label>Job Description</label>
+                    <textarea name="description" rows="6" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Submit Job</button>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>
