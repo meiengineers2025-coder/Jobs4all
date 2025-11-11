@@ -1,0 +1,38 @@
+<% layout('layouts/main') %>
+
+<h2 class="text-3xl font-semibold text-gray-800 mb-8">
+    Browse Available Jobs
+</h2>
+
+<% if (jobs.length === 0) { %>
+    <p class="text-gray-500">No jobs available right now.</p>
+<% } %>
+
+<div class="grid md:grid-cols-2 gap-6">
+
+    <% jobs.forEach(job => { %>
+        <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200 hover:shadow-lg transition">
+
+            <h3 class="text-xl font-semibold text-indigo-600"><%= job.title %></h3>
+
+            <p class="text-gray-600 mt-2"><b>Location:</b> <%= job.location || 'Remote' %></p>
+            <p class="text-gray-600"><b>Salary:</b> ₹<%= job.salary || 'Not specified' %></p>
+            <p class="text-gray-600 mt-1"><b>Skills:</b> <%= job.skills %></p>
+            <p class="text-gray-500 text-sm mt-2">
+                Posted by: <%= job.employer_name || 'Anonymous' %>
+            </p>
+
+            <div class="mt-4 flex justify-between items-center">
+                <a href="/jobs/<%= job.id %>"
+                   class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+                    View Details
+                </a>
+                <span class="text-gray-400 text-sm">
+                    <%= job.created_at.substring(0,10) %>
+                </span>
+            </div>
+
+        </div>
+    <% }) %>
+
+</div>
