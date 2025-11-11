@@ -54,4 +54,5 @@ db.serialize(() => {
 });
 
 // ===============================
+
 db.close(() => console.log("✅ SQLite initialized successfully"));
