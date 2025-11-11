@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof pageTitle !== "undefined" ? pageTitle : "Job Portal" %></title>
+
+    <!-- ✅ Tailwind CDN (no build required) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ✅ Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- NAVBAR -->
+    <header class="bg-white shadow-md py-4 px-8 flex justify-between items-center">
+        <h1 class="text-2xl font-semibold text-indigo-600">Job Portal</h1>
+
+        <% if (user) { %>
+            <nav class="flex gap-6 items-center">
+
+                <% if (user.role === "candidate") { %>
+                    <a href="/candidate/dashboard" class="hover:text-indigo-600">Dashboard</a>
+                    <a href="/jobs" class="hover:text-indigo-600">Find Jobs</a>
+                    <a href="/candidate/profile" class="hover:text-indigo-600">Profile</a>
+                <% } %>
+
+                <% if (user.role === "employer") { %>
+                    <a href="/employer/dashboard" class="hover:text-indigo-600">Dashboard</a>
+                    <a href="/employer/post-job" class="hover:text-indigo-600">Post Job</a>
+                    <a href="/employer/plans" class="hover:text-indigo-600">Plans</a>
+                <% } %>
+
+                <a href="/logout" class="text-red-500 font-semibold hover:text-red-700">Logout</a>
+            </nav>
+        <% } %>
+    </header>
+
+    <!-- CONTENT SLOT -->
+    <main class="max-w-6xl mx-auto py-10 px-6">
+        <%- body %>
+    </main>
+
+</body>
+</html>
