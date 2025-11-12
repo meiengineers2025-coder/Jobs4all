@@ -1,48 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= typeof pageTitle !== "undefined" ? pageTitle : "Job Portal" %></title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title || "Jobs Portal" %></title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f3f6fb;
+        color: #333;
+      }
 
-    <!-- ✅ Tailwind CDN (no build required) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+      nav {
+        background: #0052cc;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 1.5rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
 
-    <!-- ✅ Google Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+      nav .logo {
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
 
-</head>
-<body class="bg-gray-100 text-gray-800">
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+      }
 
-    <!-- NAVBAR -->
-    <header class="bg-white shadow-md py-4 px-8 flex justify-between items-center">
-        <h1 class="text-2xl font-semibold text-indigo-600">Job Portal</h1>
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.2s ease;
+      }
 
-        <% if (user) { %>
-            <nav class="flex gap-6 items-center">
+      nav ul li a:hover {
+        opacity: 0.8;
+      }
 
-                <% if (user.role === "candidate") { %>
-                    <a href="/candidate/dashboard" class="hover:text-indigo-600">Dashboard</a>
-                    <a href="/jobs" class="hover:text-indigo-600">Find Jobs</a>
-                    <a href="/candidate/profile" class="hover:text-indigo-600">Profile</a>
-                <% } %>
+      main {
+        padding: 2rem;
+        text-align: center;
+      }
 
-                <% if (user.role === "employer") { %>
-                    <a href="/employer/dashboard" class="hover:text-indigo-600">Dashboard</a>
-                    <a href="/employer/post-job" class="hover:text-indigo-600">Post Job</a>
-                    <a href="/employer/plans" class="hover:text-indigo-600">Plans</a>
-                <% } %>
+      footer {
+        margin-top: 3rem;
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.9rem;
+        color: #666;
+      }
 
-                <a href="/logout" class="text-red-500 font-semibold hover:text-red-700">Logout</a>
-            </nav>
+      .btn {
+        display: inline-block;
+        background: #0052cc;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        margin: 5px;
+      }
+
+      .btn:hover {
+        background: #003d99;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo">🚀 Jobs Portal</div>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <% if (!user) { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+        <% } else { %>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/logout">Logout</a></li>
         <% } %>
-    </header>
+      </ul>
+    </nav>
 
-    <!-- CONTENT SLOT -->
-    <main class="max-w-6xl mx-auto py-10 px-6">
-        <%- body %>
+    <main>
+      <%- body %>
     </main>
 
-</body>
-
+    <footer>
+      © <%= new Date().getFullYear() %> Jobs Portal. All rights reserved.
+    </footer>
+  </body>
 </html>
