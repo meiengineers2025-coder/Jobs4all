@@ -1,0 +1,22 @@
+<% layout('layouts/main') %>
+
+<section style="max-width: 800px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: left;">
+  <h2 style="color:#0052cc;">Welcome, <%= user.name %> 👋</h2>
+  <p style="color:#555;">You are logged in via <strong><%= user.provider || 'local' %></strong>.</p>
+  <p><strong>Email:</strong> <%= user.email %></p>
+
+  <hr style="margin:2rem 0;" />
+
+  <h3 style="color:#0052cc;">Profile</h3>
+  <p>Manage your personal details and update your password.</p>
+
+  <h3 style="color:#0052cc; margin-top:1.5rem;">My Applications</h3>
+  <p>Track the jobs you've applied to and get status updates.</p>
+
+  <h3 style="color:#0052cc; margin-top:1.5rem;">Settings</h3>
+  <p>Configure account options, notifications, and privacy.</p>
+
+  <div style="margin-top:2rem;">
+    <a href="/logout" style="background:#0052cc;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;">Logout</a>
+  </div>
+</section>

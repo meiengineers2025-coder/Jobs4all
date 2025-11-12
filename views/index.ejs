@@ -1,87 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jobs Portal | Home</title>
+<% layout('layouts/main') %>
 
-    <!-- Optional CSS file in /public/css -->
-    <link rel="stylesheet" href="/css/styles.css" />
+<section style="max-width: 600px; margin: 3rem auto; background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+  <h1>Welcome to Jobs Portal 🎉</h1>
+  <p style="color:#555; margin-top:1rem;">
+    Your all-in-one platform for job seekers and employers.  
+    Create your account, apply for jobs, and get matched instantly!
+  </p>
 
-    <style>
-      body {
-        font-family: "Segoe UI", Roboto, sans-serif;
-        background: #f3f6fb;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        color: #333;
-      }
-      header {
-        background: #0052cc;
-        color: white;
-        padding: 1rem 0;
-        font-size: 1.5rem;
-        font-weight: 600;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      }
-      main {
-        margin: 3rem auto;
-        max-width: 600px;
-        background: white;
-        border-radius: 16px;
-        padding: 2rem;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      }
-      h1 {
-        color: #0052cc;
-      }
-      p {
-        color: #555;
-      }
-      nav {
-        margin-top: 2rem;
-      }
-      nav a {
-        display: inline-block;
-        margin: 0.5rem;
-        padding: 0.8rem 1.5rem;
-        border-radius: 8px;
-        background: #0052cc;
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-        transition: background 0.2s ease;
-      }
-      nav a:hover {
-        background: #003d99;
-      }
-      footer {
-        margin-top: 3rem;
-        font-size: 0.9rem;
-        color: #777;
-      }
-    </style>
-  </head>
-  <body>
-    <header>🚀 Jobs Portal</header>
+  <% if (!user) { %>
+  <div style="margin-top: 2rem;">
+    <a href="/login" class="btn">Login</a>
+    <a href="/register" class="btn">Register</a>
+  </div>
 
-    <main>
-      <h1>Welcome to Jobs Portal</h1>
-      <p>
-        Your all-in-one platform for job seekers and employers.  
-        Backend is live on Render + SQLite integration verified.
-      </p>
-
-      <nav>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-        <a href="/users">View Users (JSON)</a>
-      </nav>
-    </main>
-
-    <footer>
-      <p>© <%= new Date().getFullYear() %> Jobs Portal. All rights reserved.</p>
-    </footer>
-  </body>
-</html>
+  <hr style="margin:2rem 0;" />
+  <p>Or sign in with:</p>
+  <div style="margin-top: 1rem;">
+    <a href="/auth/google" style="background:#DB4437;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;margin:5px;display:inline-block;">Google</a>
+    <a href="/auth/facebook" style="background:#1877F2;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;margin:5px;display:inline-block;">Facebook</a>
+    <a href="/auth/linkedin" style="background:#0A66C2;color:white;padding:10px 20px;border-radius:6px;text-decoration:none;margin:5px;display:inline-block;">LinkedIn</a>
+  </div>
+  <% } else { %>
+  <div style="margin-top:2rem;">
+    <p>You're already signed in as <strong><%= user.name %></strong>.</p>
+    <a href="/dashboard" class="btn">Go to Dashboard</a>
+  </div>
+  <% } %>
+</section>
