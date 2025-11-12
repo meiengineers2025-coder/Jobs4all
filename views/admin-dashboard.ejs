@@ -1,0 +1,41 @@
+<% layout('layouts/main') %>
+
+<section style="max-width: 900px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+  <h2 style="color:#e53935;">Admin Dashboard 👑</h2>
+  <p>Welcome, <strong><%= admin.name %></strong> (<%= admin.email %>)</p>
+
+  <div style="margin-top:1rem;">
+    <a href="/admin/logout"
+      style="background:#e53935;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;">Logout</a>
+  </div>
+
+  <hr style="margin:2rem 0;" />
+
+  <h3 style="color:#0052cc;">Registered Users</h3>
+  <table border="1" cellpadding="10" cellspacing="0" style="width:100%;border-collapse:collapse;">
+    <thead style="background:#f3f6fb;">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Provider</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (users && users.length > 0) { %>
+        <% users.forEach(user => { %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.provider %></td>
+            <td><%= user.role %></td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr><td colspan="5" style="text-align:center;">No users found.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</section>
