@@ -1,5 +1,5 @@
 // ===== server.js =====
-// Express + SQLite + WhatsApp Stub + Safe for Render.com
+// Express + SQLite + WhatsApp Stub + EJS Views + Safe for Render
 
 const express = require("express");
 const session = require("express-session");
@@ -44,6 +44,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // ====== 4. SESSION STORE ======
 app.use(
@@ -64,10 +65,31 @@ const whatsappService = {
 };
 
 // ====== 6. ROUTES ======
+
+// Home page (renders index.ejs)
 app.get("/", (req, res) => {
-  res.send("<h2>🚀 Jobs Portal Backend Running on Render + SQLite!</h2>");
+  res.render("index");
 });
 
+// Login page
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+// Register page
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+// Dashboard (protected route example)
+app.get("/dashboard", (req, res) => {
+  if (!req.session.userId) {
+    return res.redirect("/login");
+  }
+  res.render("dashboard", { user: req.session.user });
+});
+
+// Get users (API)
 app.get("/users", (req, res) => {
   db.all("SELECT id, name, email FROM users", [], (err, rows) => {
     if (err) return res.status(500).send("DB error");
@@ -75,6 +97,7 @@ app.get("/users", (req, res) => {
   });
 });
 
+// Register new user (POST)
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) return res.status(400).send("Missing fields");
@@ -82,22 +105,40 @@ app.post("/register", (req, res) => {
   db.run(
     "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
     [name, email, password],
-    (err) => {
+    function (err) {
       if (err) {
         console.error(err);
         return res.status(500).send("User already exists or DB error");
       }
-      res.send("✅ User registered successfully");
+      console.log(`✅ User registered: ${email}`);
+      res.redirect("/login");
     }
   );
 });
 
-// ====== 7. WHATSAPP TEST ROUTE ======
+// Login (POST)
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  db.get(
+    "SELECT * FROM users WHERE email = ? AND password = ?",
+    [email, password],
+    (err, user) => {
+      if (err) return res.status(500).send("DB error");
+      if (!user) return res.status(401).send("Invalid credentials");
+      req.session.userId = user.id;
+      req.session.user = user;
+      console.log(`✅ User logged in: ${user.email}`);
+      res.redirect("/dashboard");
+    }
+  );
+});
+
+// WhatsApp Test Route
 app.get("/test-whatsapp", async (req, res) => {
   const result = await whatsappService.sendMessage("9999999999", "Hello from Render!");
   res.json(result);
 });
 
-// ====== 8. SERVER START ======
+// ====== 7. SERVER START ======
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
